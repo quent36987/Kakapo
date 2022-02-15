@@ -3,8 +3,10 @@ import Home from "./pages/Home"
 import Navbar from './components/Navbar'
 import SignUpModal from "./components/SignUpModal";
 import SignInModal from "./components/SignInModal"
-import Private from "./pages/Private/Private"
-import PrivateHome from "./pages/Private/PrivateHome/PrivateHome";
+import NavbarDown from "./components/NavbarDown";
+import Actu from "./pages/Actu";
+import Club from "./pages/Club";
+import Bar from "./pages/Bar";
 
 function App() {
   return (
@@ -14,10 +16,13 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/private" element={<Private />}>
-          <Route path="/private/private-home" element={<PrivateHome />} />
-        </Route>
+        <Route path="/actu" element={<Actu />} />
+        <Route path="/club" element={<Club />} />
+        <Route path="/bar" element={<Bar />} />
+      
       </Routes>
+      <NavbarDown />
+
     </>
   );
 }

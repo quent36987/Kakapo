@@ -41,7 +41,7 @@ export default function SignUpModal() {
       setValidation("")
       // console.log(cred);
       toggleModals("close")
-      navigate("/private/private-home")
+      navigate("/actu")
 
     } catch (err) {
 

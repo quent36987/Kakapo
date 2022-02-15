@@ -30,7 +30,7 @@ export default function SignUpModal() {
       setValidation("");
       // console.log(cred);
       toggleModals("close");
-      navigate("/private/private-home");
+      navigate("/actu");
     } catch {
       setValidation("Wopsy, email and/or password incorrect")
     }
