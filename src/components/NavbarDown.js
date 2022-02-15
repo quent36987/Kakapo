@@ -34,7 +34,7 @@ export default function NavbarDown() {
             <a class="nav-link" href="/bar">Bar</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled">KAKAKAKAKAKAPO</a>
+            <a class="nav-link disabled">KAKAKAKAKAKAPOO</a>
         </li>
         </ul>
 
