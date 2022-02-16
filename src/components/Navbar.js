@@ -8,6 +8,7 @@ import {auth} from "../firebase-config"
 export default function Navbar() {
 
   const {toggleModals} = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
 
   const navigate = useNavigate()
 
@@ -27,21 +28,24 @@ export default function Navbar() {
       </Link>
 
       <div>
-        <button 
-        onClick={() => toggleModals("signUp")}
-        className="btn btn-primary">
-          Sign Up
-        </button>
-        <button 
+
+        { currentUser ?
+          <button
+          onClick={logOut}
+          className="btn btn-danger ms-2">
+            Log Out
+          </button> : <div>
+            <button
+                onClick={() => toggleModals("signUp")}
+                className="btn btn-primary">
+              Sign Up
+            </button>
+            <button
           onClick={() => toggleModals("signIn")}
-        className="btn btn-primary ms-2">
+          className="btn btn-primary ms-2">
           Sign In
-        </button>
-        <button 
-        onClick={logOut}
-        className="btn btn-danger ms-2">
-          Log Out
-        </button>
+          </button> </div>
+        }
       </div>
     </nav>
   )

@@ -26,13 +26,14 @@ export default function SignUpModal() {
         inputs.current[1].value
       );
       // à tester
-      // formRef.current.reset();
+      //
       setValidation("");
       // console.log(cred);
       toggleModals("close");
       navigate("/actu");
     } catch {
       setValidation("Wopsy, email and/or password incorrect")
+      //toggleModals("signIn")
     }
   };
 
@@ -56,7 +57,7 @@ export default function SignUpModal() {
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Sign Up</h5>
+                  <h5 className="modal-title">Sign In</h5>
                   <button onClick={closeModal} className="btn-close"></button>
                 </div>
 
