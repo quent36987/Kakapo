@@ -4,6 +4,8 @@ import {Link} from "react-router-dom"
 import {signOut} from "firebase/auth"
 import { useNavigate } from 'react-router-dom'
 import {auth} from "../firebase-config"
+import { Image } from 'react-native'
+
 
 export default function Navbar() {
 
@@ -11,6 +13,8 @@ export default function Navbar() {
   const {currentUser} = useContext(UserContext)
 
   const navigate = useNavigate()
+
+
 
   const logOut = async () => {
     try {
@@ -22,11 +26,11 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="navbar navbar-light bg-light px-4">
-      <Link to="/" className="navbar-brand">
-        Kakapo 
-      </Link>
 
+    <nav className="navbar navbar-light bg-light px-4">
+      <a className="navbar-brand" href="/">
+        Kakapo
+      </a>
       <div>
 
         { currentUser ?
