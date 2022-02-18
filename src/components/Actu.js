@@ -82,10 +82,30 @@ export default function Actu() {
   const addvaleur = async () => {
 
       const collectionRef = collection(db, "post");
+
+
       const payload = { titre, message, date:(Date.now()) };
 
-      const docRef = await addDoc(collectionRef, payload);
-      console.log("The new ID is: " + docRef.id);
+try {
+    const docRef = await addDoc(collectionRef, payload);
+
+    setAlert({
+        open: true,
+        message: "post published !",
+        type: "success",
+    });
+    setTitre('');
+    setMessage('');
+}
+catch (error)
+{
+    setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+    });
+}
+
 
   };
 
@@ -93,7 +113,7 @@ export default function Actu() {
 const butonadd = async () => {
 
 
-      addvaleur()
+      addvaleur();
 
 
       return;
@@ -125,22 +145,11 @@ const butonadd = async () => {
               style={{ marginBottom: 20, width: "100%" }}
           />
           <SelectButton
-              onClick={() => butonadd()}
+              onClick={ () => butonadd()}
               selected={false}
 
           > Send Post ! </SelectButton>
 
-          { posts.map( (p) => (
-
-                 <div >
-                      <Typography variant="h3" >
-                          {p.titre}
-                      </Typography>
-                      <Typography variant="subtitle1" >
-                          {p.message}
-                      </Typography>
-                  </div>
-          ))}
 
       </Container>
     </ThemeProvider>

@@ -12,7 +12,10 @@ const Dot = ({ color }) => {
 };
 
 export default function Posts() {
+
     const [colors, setColors] = useState([]);
+
+
 
     useEffect(() => {
         console.log('e');
@@ -23,10 +26,12 @@ export default function Posts() {
         ));
         return unsub;
     }, []);
-    
+
+
     return (
         <div className="root">
             <ul>
+
                 {colors.map((color) => (
                     <li key={color.id}>
                         <Dot color={color.titre} /> {color.message}
@@ -34,5 +39,6 @@ export default function Posts() {
                 ))}
             </ul>
         </div>
+
     );
 }
