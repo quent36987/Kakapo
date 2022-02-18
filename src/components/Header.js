@@ -17,7 +17,7 @@ import AuthModal from "./Authentication/AuthModal";
 import UserSidebar from "./Authentication/UserSidebar";
 import {Button} from "@mui/material";
 import {useEffect} from "react";
-import {collection, onSnapshot, orderBy, query} from "firebase/firestore";
+
 import {db, auth} from "../firebase";
 import { doc, getDoc} from "firebase/firestore";
 
@@ -88,6 +88,7 @@ function Header() {
       <AppBar color="transparent" position="static">
         <Container>
           <Toolbar>
+
             <Typography
               onClick={() => history.push(`/`)}
               variant="h6"
