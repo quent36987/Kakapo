@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-
+import { auth,db } from "./firebase";
+import { doc, getDoc} from "firebase/firestore";
 
 
     const Crypto = createContext();
@@ -50,6 +50,9 @@ import { auth } from "./firebase";
                     unsubscribe();
                 };
         });*/
+
+
+
 
         useEffect(() => {
 

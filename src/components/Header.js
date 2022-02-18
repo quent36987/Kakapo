@@ -57,28 +57,26 @@ function Header() {
 
 
 
-
-  const isadm = async () => {
+  async function isadm() {
     if (!user) {
       return;
     }
     console.log(user);
-      const ref = doc(db, "adm", user.uid);
-        const docSnap = await getDoc(ref);
-        if (docSnap.exists()) {
-          const city = docSnap.data();
-          console.log(city.perm);
-          setPerm(city.perm == "bde")
-        } else {
-          console.log("No such document!");
-        }
+    const ref = doc(db, "adm", user.email);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      const city = docSnap.data();
+      console.log(city.perm);
+      setPerm(city.perm == "bde")
+    } else {
+      console.log("No such document!");
     }
+  }
 
 
     useEffect(() => {
         isadm();
     }, user);
-
 
 
 
@@ -116,6 +114,7 @@ function Header() {
             { perm ? <Button onClick={() => setEdit(!edit)}> Edit </Button> : <></> }
 
 
+
             {user ? <UserSidebar /> : <AuthModal />}
           </Toolbar>
         </Container>
@@ -123,5 +122,6 @@ function Header() {
     </ThemeProvider>
   );
 }
+
 
 export default Header;

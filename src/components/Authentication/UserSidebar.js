@@ -44,7 +44,7 @@ export default function UserSidebar() {
   const [state, setState] = React.useState({
     right: false,
   });
-  const { user, setAlert, setUser } = CryptoState();
+  const { user, setAlert, setUser, setPerm } = CryptoState();
 
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -60,6 +60,7 @@ export default function UserSidebar() {
 
   const logOut = () => {
     signOut(auth);
+    setPerm(null);
     setAlert({
       open: true,
       type: "success",
