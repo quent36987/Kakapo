@@ -7,7 +7,13 @@ import { auth } from "./firebase";
     const Crypto = createContext();
 
     const Context = ({children}) => {
-        const [currency, setCurrency] = useState("INR");
+
+
+        // pour le mode edit ;)
+        const [edit, setEdit] = useState(false);
+        const [perm, setPerm] = useState(null);
+
+
         const [alert, setAlert] = useState({
             open: false,
             message: "",
@@ -50,6 +56,7 @@ import { auth } from "./firebase";
             onAuthStateChanged(auth, (user) => {
                 if (user) setUser(user);
                 else setUser(null);
+
             });
         }, []);
 
@@ -57,12 +64,14 @@ import { auth } from "./firebase";
         return (
             <Crypto.Provider
                 value={{
-                    currency,
-                    setCurrency,
+                    edit,
+                    setEdit,
                     alert,
                     setAlert,
                     user,
                     posts,
+                    perm,
+                    setPerm,
                 }}
             >
                 {children}

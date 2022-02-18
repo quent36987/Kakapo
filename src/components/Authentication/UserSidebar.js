@@ -44,7 +44,7 @@ export default function UserSidebar() {
   const [state, setState] = React.useState({
     right: false,
   });
-  const { user, setAlert } = CryptoState();
+  const { user, setAlert, setUser } = CryptoState();
 
 
   const toggleDrawer = (anchor, open) => (event) => {

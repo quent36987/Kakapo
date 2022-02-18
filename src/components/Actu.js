@@ -32,7 +32,7 @@ export default function Actu() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  const { symbol, coins, loading,setAlert,posts } = CryptoState();
+  const { symbol, coins, edit,setAlert,posts } = CryptoState();
 
   const useStyles = makeStyles({
     row: {
@@ -128,6 +128,8 @@ const butonadd = async () => {
 
           <Posts/>
 
+          { edit ?
+              <>
         <TextField
             variant="outlined"
             label="Titre"
@@ -149,7 +151,7 @@ const butonadd = async () => {
               selected={false}
 
           > Send Post ! </SelectButton>
-
+              </> : <> </>}
 
       </Container>
     </ThemeProvider>
