@@ -6,7 +6,7 @@ import { Button, Tab, Tabs, AppBar, Box } from "@material-ui/core";
 import Signup from "./Signup";
 import Login from "./Login";
 import { useState } from "react";
-import { CryptoState } from "../../Context";
+import { AppState } from "../../Context";
 import { auth } from "../../firebase";
 import GoogleButton from "react-google-button";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -39,7 +39,7 @@ export default function AuthModal() {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const { setAlert } = CryptoState();
+  const { setAlert } = AppState();
 
   const handleOpen = () => {
     setOpen(true);

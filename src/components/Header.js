@@ -1,8 +1,6 @@
 import {
   AppBar,
   Container,
-  MenuItem,
-  Select,
   Toolbar,
   Typography,
 } from "@material-ui/core";
@@ -12,13 +10,13 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-import { CryptoState } from "../Context";
+import { AppState } from "../Context";
 import AuthModal from "./Authentication/AuthModal";
 import UserSidebar from "./Authentication/UserSidebar";
 import {Button} from "@mui/material";
 import {useEffect} from "react";
 
-import {db, auth} from "../firebase";
+import {db} from "../firebase";
 import { doc, getDoc} from "firebase/firestore";
 
 const useStyles = makeStyles((theme) => ({
@@ -51,34 +49,29 @@ const darkTheme = createTheme({
 
 function Header() {
   const classes = useStyles();
-  const { edit, setEdit, user, perm, setPerm } = CryptoState();
+  const { edit, setEdit, user, perm, setPerm } = AppState();
 
   const history = useHistory();
 
 
-
   async function isadm() {
-    if (!user) {
+    if (!user || perm) {
       return;
     }
-    console.log(user);
+    console.log('user :' , user);
     const ref = doc(db, "adm", user.email);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
       const city = docSnap.data();
-      console.log(city.perm);
-      setPerm(city.perm == "bde")
-    } else {
-      console.log("No such document!");
+      setPerm(city.perm === "bde");
+      setEdit(false);
     }
   }
 
 
     useEffect(() => {
         isadm();
-    }, user);
-
-
+    });
 
 
 

@@ -1,57 +1,23 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Pagination from "@material-ui/lab/Pagination";
 import {
     Container,
     createTheme,
-    TableCell,
-    LinearProgress,
     ThemeProvider,
-    Typography,
     TextField,
-    TableBody,
-    TableRow,
-    TableHead,
-    TableContainer,
-    Table,
-    Paper, Button,
 } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
-import { CryptoState } from "../Context";
+import { AppState } from "../Context";
 import {db} from "../firebase";
 import { collection, addDoc  } from "firebase/firestore";
-import ReactHtmlParser from "react-html-parser";
 import SelectButton from "./SelectButton";
 import Posts from "./Posts";
 
-export function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+
 
 export default function Actu() {
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
 
-  const { symbol, coins, edit,setAlert,posts } = CryptoState();
-
-  const useStyles = makeStyles({
-    row: {
-      backgroundColor: "#16171a",
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: "#131111",
-      },
-      fontFamily: "Montserrat",
-    },
-    pagination: {
-      "& .MuiPaginationItem-root": {
-        color: "gold",
-      },
-    },
-  });
-
-  const classes = useStyles();
-  const history = useHistory();
+  const { edit,setAlert } = AppState();
+  const [titre, setTitre] = useState("");
+  const [message, setMessage] = useState("");
 
   const darkTheme = createTheme({
     palette: {
@@ -62,72 +28,38 @@ export default function Actu() {
     },
   });
 
-  const handleSearch = () => {
-    return coins.filter(
-      (coin) =>
-        coin.name.toLowerCase().includes(search) ||
-        coin.symbol.toLowerCase().includes(search)
-    );
-  };
 
 
-
-
-    const [titre, setTitre] = useState("");
-    const [message, setMessage] = useState("");
-
-
-
-
-  const addvaleur = async () => {
+  const addPost = async () => {
 
       const collectionRef = collection(db, "post");
-
-
       const payload = { titre, message, date:(Date.now()) };
 
-try {
-    const docRef = await addDoc(collectionRef, payload);
-
-    setAlert({
-        open: true,
-        message: "post published !",
-        type: "success",
-    });
-    setTitre('');
-    setMessage('');
-}
-catch (error)
-{
-    setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-    });
-}
-
-
+      try {
+        await addDoc(collectionRef, payload);
+        setAlert({
+            open: true,
+            message: "post published !",
+            type: "success",
+        });
+        setTitre('');
+        setMessage('');
+      }
+      catch (error)
+      {
+        setAlert({
+            open: true,
+            message: error.message,
+            type: "error",
+        });
+      }
   };
-
-
-const butonadd = async () => {
-
-
-      addvaleur();
-
-
-      return;
-    }
-
 
 
   return (
     <ThemeProvider theme={darkTheme}>
       <Container style={{ textAlign: "center" }}>
-
-
           <Posts/>
-
           { edit ?
               <>
         <TextField
@@ -147,7 +79,7 @@ const butonadd = async () => {
               style={{ marginBottom: 20, width: "100%" }}
           />
           <SelectButton
-              onClick={ () => butonadd()}
+              onClick={ () => addPost()}
               selected={false}
 
           > Send Post ! </SelectButton>

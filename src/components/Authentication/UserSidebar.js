@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import { Avatar, Button } from "@material-ui/core";
-import { CryptoState } from "../../Context";
+import { AppState } from "../../Context";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -44,7 +44,7 @@ export default function UserSidebar() {
   const [state, setState] = React.useState({
     right: false,
   });
-  const { user, setAlert, setUser, setPerm } = CryptoState();
+  const { user, setAlert,  setPerm } = AppState();
 
 
   const toggleDrawer = (anchor, open) => (event) => {

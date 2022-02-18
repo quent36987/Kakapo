@@ -1,10 +1,10 @@
 // Snack Component - https://material-ui.com/components/snackbars/
 import { Snackbar } from "@material-ui/core";
 import MuiAlert from "@material-ui/lab/Alert";
-import { CryptoState } from "../Context";
+import { AppState } from "../Context";
 
 const Alert = () => {
-  const { alert, setAlert } = CryptoState();
+  const { alert, setAlert } = AppState();
 
   const handleCloseAlert = (event, reason) => {
     if (reason === "clickaway") {

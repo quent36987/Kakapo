@@ -1,4 +1,3 @@
-
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./../firebase";
@@ -15,10 +14,8 @@ export default function Posts() {
 
     const [colors, setColors] = useState([]);
 
-
-
     useEffect(() => {
-        console.log('e');
+        console.log('recuperation des posts');
         const collectionRef = collection(db, "post");
         const q = query(collectionRef, orderBy("date", "desc"));
         const unsub = onSnapshot(q, (snapshot) =>

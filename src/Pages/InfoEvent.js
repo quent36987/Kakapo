@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import {
   CircularProgress,
   makeStyles,
 } from "@material-ui/core";
-import { CryptoState } from "../Context";
+
 
 const InfoEvent = ({ id }) => {
   const [historicData] = useState();
-  const { currency } = CryptoState();
+  //const { currency } = AppState();
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -27,7 +27,7 @@ const InfoEvent = ({ id }) => {
   }));
 
   const classes = useStyles();
-
+/*
   const RecupData = async () => {
     // set les info ?
   };
@@ -36,7 +36,7 @@ const InfoEvent = ({ id }) => {
     // chargement des donne
   }, [ currency]);
 
-
+*/
 
   return (
       <div className={classes.container}>
