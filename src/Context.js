@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "./firebase";
-import { onSnapshot, doc, query, where, getDocs , collection } from "firebase/firestore";
+import { auth } from "./firebase";
 
 
 
@@ -17,6 +16,7 @@ import { onSnapshot, doc, query, where, getDocs , collection } from "firebase/fi
 
         const [user, setUser] = useState(null);
         const [posts, setposts] = useState([]);
+
         /*
         const coinRef = query(collection(db, "post"));
         const unsubscribe = onSnapshot(coinRef, (querySnapshot) => {
@@ -27,7 +27,7 @@ import { onSnapshot, doc, query, where, getDocs , collection } from "firebase/fi
             console.log('oui');
             setposts(cities);
         });*/
-        const coinRef = collection(db, "post");
+      /*  const coinRef = collection(db, "post");
         useEffect(() => {
             while(posts.length > 0) {
                 posts.pop();
@@ -43,7 +43,7 @@ import { onSnapshot, doc, query, where, getDocs , collection } from "firebase/fi
                 return () => {
                     unsubscribe();
                 };
-        });
+        });*/
 
         useEffect(() => {
 

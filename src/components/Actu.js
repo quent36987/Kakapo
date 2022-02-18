@@ -22,6 +22,7 @@ import {db} from "../firebase";
 import { collection, addDoc  } from "firebase/firestore";
 import ReactHtmlParser from "react-html-parser";
 import SelectButton from "./SelectButton";
+import Posts from "./Posts";
 
 export function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -113,15 +114,12 @@ const butonadd = async () => {
 
 
 
-
-
-
-
   return (
     <ThemeProvider theme={darkTheme}>
       <Container style={{ textAlign: "center" }}>
 
 
+          <Posts/>
 
         <TextField
             variant="outlined"
