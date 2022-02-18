@@ -81,25 +81,12 @@ export default function Actu() {
 
   const addvaleur = async () => {
 
-    try {
-        const docRef = await addDoc(collection(db, "post"), {
-            titre: titre,
-            message: message,
-            date: Date.now()
-        });
-        setAlert({
-            open: true,
-            message: "send " + titre,
-            type: "success",
-        });
+      const collectionRef = collection(db, "post");
+      const payload = { titre, message, date:(Date.now()) };
 
-    } catch (error) {
-      setAlert({
-        open: true,
-        message: error.message,
-        type: "error",
-      });
-    }
+      const docRef = await addDoc(collectionRef, payload);
+      console.log("The new ID is: " + docRef.id);
+
   };
 
 

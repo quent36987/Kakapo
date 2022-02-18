@@ -1,5 +1,5 @@
 
-import { onSnapshot, collection } from "firebase/firestore";
+import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./../firebase";
 
@@ -12,18 +12,18 @@ const Dot = ({ color }) => {
 };
 
 export default function Posts() {
-    const [colors, setColors] = useState([{ titre: "Loading...", id: "initial" }]);
+    const [colors, setColors] = useState([]);
 
-    useEffect(
-        () =>
-            onSnapshot(collection(db, "post"), (snapshot) =>
-                setColors(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })
-                    )
-                )
-            ),
-        []
-    );
-
+    useEffect(() => {
+        console.log('e');
+        const collectionRef = collection(db, "post");
+        const q = query(collectionRef, orderBy("date", "desc"));
+        const unsub = onSnapshot(q, (snapshot) =>
+            setColors(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        ));
+        return unsub;
+    }, []);
+    
     return (
         <div className="root">
             <ul>
