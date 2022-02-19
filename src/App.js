@@ -10,8 +10,8 @@ import BarPage from "./Pages/BarPage";
 
 const useStyles = makeStyles(() => ({
   App: {
-    backgroundColor: "#cab1ac",
-    color: "white",
+    backgroundColor: "#c7aca6",
+    //color: "white",
     minHeight: "100vh",
   },
 }));

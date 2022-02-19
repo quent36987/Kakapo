@@ -1,16 +1,53 @@
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./../firebase";
+import {Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
+import {blue, red} from "@mui/material/colors";
 
-const Dot = ({ color }) => {
-    const style = {
-        height: 25,
-        width: 25,
-    };
-    return <h2 style={style}>{color}</h2>;
+function MoreVertIcon() {
+    return null;
+}
+
+const Dot = ({ post }) => {
+
+    return (
+    <Card sx={{ maxWidth: 500  }}>
+        <CardHeader
+            title={post.titre}
+            action={
+                <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                </IconButton>
+            }
+            sx={{ backgroundColor:blue }}
+        />
+        <CardMedia
+            component="img"
+            height="194"
+            image="https://blog.logrocket.com/wp-content/uploads/2021/03/hands-on-react-native-web-tutorial.png"
+            alt="img"
+        />
+        <CardContent>
+            <Typography  variant="body2" color="text.secondary">
+                {post.message}
+            </Typography>
+        </CardContent>
+    </Card>
+    )
+
 };
 
 export default function Posts() {
+
+    //info du post :
+    // -> date
+    // -> auteur
+    // -> titre
+    // -> message ?
+    // -> image ?
+    // -> imporant ?
+
+
 
     const [colors, setColors] = useState([]);
 
@@ -26,16 +63,18 @@ export default function Posts() {
 
 
     return (
-        <div className="root">
-            <ul>
+        <Box   sx={{  alignItems: 'center'  }}>
 
-                {colors.map((color) => (
-                    <li key={color.id}>
-                        <Dot color={color.titre} /> {color.message}
-                    </li>
+                {colors.map((post) => (
+
+                    <div key={post.id}  style={{
+                        marginTop:10
+
+                    }} >
+                        <Dot post={post}   />
+                    </div>
                 ))}
-            </ul>
-        </div>
+        </Box >
 
     );
 }

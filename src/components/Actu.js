@@ -6,10 +6,15 @@ import {
     TextField,
 } from "@material-ui/core";
 import { AppState } from "../Context";
-import {db} from "../firebase";
+import {db, storage} from "../firebase";
 import { collection, addDoc  } from "firebase/firestore";
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import SelectButton from "./SelectButton";
+
 import Posts from "./Posts";
+
+import {FormControlLabel, IconButton, Input, Switch} from "@mui/material";
+
 
 
 
@@ -27,6 +32,8 @@ export default function Actu() {
       type: "dark",
     },
   });
+
+
 
 
 
@@ -56,12 +63,19 @@ export default function Actu() {
   };
 
 
+
+
+
+
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider >
+
       <Container style={{ textAlign: "center" }}>
-          <Posts/>
+
           { edit ?
-              <>
+
+
+              <div style={{ marginBottom: 30,marginTop : 10}}>
         <TextField
             variant="outlined"
             label="Titre"
@@ -78,13 +92,22 @@ export default function Actu() {
               fullWidth
               style={{ marginBottom: 20, width: "100%" }}
           />
+
+                  <FormControlLabel control={<Switch defaultChecked  color="warning" />} label="Imporant"  />
+                  <div  style={{ marginBottom: 20,marginTop:20 }}>
+
+              </div>
+
           <SelectButton
-              onClick={ () => addPost()}
               selected={false}
 
           > Send Post ! </SelectButton>
-              </> : <> </>}
+              </div>
 
+
+                  : <> </>}
+
+          <Posts/>
       </Container>
     </ThemeProvider>
   );
