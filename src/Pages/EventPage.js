@@ -11,15 +11,18 @@ const EventPage = (file) => {
 
 
 
-    const [progress, setProgress] = useState(0);
+
 
     const uploadFiles = (file) => {
         //
-        const uploadTask = ref(storage, `files/${file.name}`);
+        const uploadTask = ref(storage, `image/posts/${file.name}`);
 
-        uploadBytes(uploadTask, file).then((snapshot) => {
-            console.log('Uploaded a blob or file!');
+        const fi = uploadBytes(uploadTask, file).then((snapshot) => {
+            console.log('Uploaded file!');
         });
+        console.log(fi);
+
+
     };
 
     const formHandler = (e) => {
@@ -42,7 +45,6 @@ const EventPage = (file) => {
                 <button type="submit">Upload</button>
             </form>
             <hr />
-            <h2>Uploading done {progress}%</h2>
         </div>
     );
 };

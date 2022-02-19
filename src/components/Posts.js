@@ -1,32 +1,41 @@
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "./../firebase";
+import { db, storage } from "./../firebase";
+import {getDownloadURL, getStorage, ref} from "firebase/storage";
 import {Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
 import {blue, red} from "@mui/material/colors";
+
+
+
 
 function MoreVertIcon() {
     return null;
 }
 
+
 const Dot = ({ post }) => {
+
 
     return (
     <Card sx={{ maxWidth: 500  }}>
+
         <CardHeader
-            title={post.titre}
-            action={
-                <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                </IconButton>
-            }
-            sx={{ backgroundColor:blue }}
-        />
-        <CardMedia
+        title={post.titre}
+        action={
+            <IconButton aria-label="settings">
+                <MoreVertIcon />
+            </IconButton>
+        }
+        sx={{ backgroundColor:blue }}
+    />
+        { post.image  ? <CardMedia
             component="img"
             height="194"
-            image="https://blog.logrocket.com/wp-content/uploads/2021/03/hands-on-react-native-web-tutorial.png"
-            alt="img"
-        />
+            image={post.image}
+            alt={'url:' + post.image}
+        />  : <> </>  }
+
+
         <CardContent>
             <Typography  variant="body2" color="text.secondary">
                 {post.message}
@@ -51,13 +60,16 @@ export default function Posts() {
 
     const [colors, setColors] = useState([]);
 
+
     useEffect(() => {
         console.log('recuperation des posts');
         const collectionRef = collection(db, "post");
         const q = query(collectionRef, orderBy("date", "desc"));
         const unsub = onSnapshot(q, (snapshot) =>
-            setColors(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            setColors(snapshot.docs.map((doc) => ({ ...doc.data() , id: doc.id }))
         ));
+
+
         return unsub;
     }, []);
 

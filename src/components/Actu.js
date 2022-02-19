@@ -14,6 +14,7 @@ import SelectButton from "./SelectButton";
 import Posts from "./Posts";
 
 import {FormControlLabel, IconButton, Input, Switch} from "@mui/material";
+import {ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 
@@ -37,13 +38,29 @@ export default function Actu() {
 
 
 
-  const addPost = async () => {
+  const addPost = async (file) => {
 
+      const date = Date.now();
       const collectionRef = collection(db, "post");
-      const payload = { titre, message, date:(Date.now()) };
+      const im = { image: null };
 
+      if (file)
+      {
+      const uploadTask = ref(storage, `image/posts/${file.name}-${date}`);
+      const fi = await uploadBytes(uploadTask, file).then((snapshot) => {
+          console.log('Uploaded file!');
+      });
+      const test = ref(storage, `image/posts/${file.name}-${date}`);
+      const url =  await  getDownloadURL(test)
+          .then((url) => {
+               console.log('url',url);
+                im.image = url;
+          })
+      }
+
+      const payload2 = { titre, message, date:(Date.now()), image:im.image };
       try {
-        await addDoc(collectionRef, payload);
+        const uidpost =  await addDoc(collectionRef, payload2);
         setAlert({
             open: true,
             message: "post published !",
@@ -65,12 +82,32 @@ export default function Actu() {
 
 
 
+    const formHandler = (e) => {
+        console.log(e)
+        e.preventDefault();
+        const file = e.target[0].files[0];
+        console.log(e.target[0].files[0])
+        addPost(file);
+    };
 
 
-  return (
-    <ThemeProvider >
+
+
+
+
+
+    return (
+    <ThemeProvider theme={darkTheme} >
 
       <Container style={{ textAlign: "center" }}>
+
+          <div className="App">
+              <form onSubmit={formHandler}>
+                  <input type="file" className="input" />
+                  <button type="submit">Upload</button>
+              </form>
+              <hr />
+          </div>
 
           { edit ?
 
