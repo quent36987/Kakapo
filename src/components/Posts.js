@@ -1,9 +1,8 @@
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db, storage } from "./../firebase";
-import {getDownloadURL, getStorage, ref} from "firebase/storage";
+import { db } from "./../firebase";
 import {Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
-import {blue, red} from "@mui/material/colors";
+import {blue} from "@mui/material/colors";
 
 
 
@@ -17,10 +16,10 @@ const Dot = ({ post }) => {
 
 
     return (
-    <Card sx={{ maxWidth: 500  }}>
+    <Card sx={{ maxWidth: 800  }}>
 
         <CardHeader
-        title={post.titre}
+        title={post.titre }
         action={
             <IconButton aria-label="settings">
                 <MoreVertIcon />
@@ -28,6 +27,7 @@ const Dot = ({ post }) => {
         }
         sx={{ backgroundColor:blue }}
     />
+        {post.important ? <h1>IMPORANT</h1> : <> </> }
         { post.image  ? <CardMedia
             component="img"
             height="194"

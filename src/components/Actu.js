@@ -2,19 +2,17 @@ import React, { useState } from "react";
 import {
     Container,
     createTheme,
-    ThemeProvider,
     TextField,
+    Button,
 } from "@material-ui/core";
 import { AppState } from "../Context";
 import {db, storage} from "../firebase";
 import { collection, addDoc  } from "firebase/firestore";
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import SelectButton from "./SelectButton";
-
 import Posts from "./Posts";
 
-import {FormControlLabel, IconButton, Input, Switch} from "@mui/material";
+import {FormControlLabel, Input, Switch} from "@mui/material";
 import {ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
 
 
 
@@ -25,14 +23,18 @@ export default function Actu() {
   const [titre, setTitre] = useState("");
   const [message, setMessage] = useState("");
 
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: "#fff",
-      },
-      type: "dark",
-    },
-  });
+
+    const [state, setState] = React.useState({
+        important: false,
+    });
+
+    const handleChange = (event) => {
+        setState({
+            ...state,
+            [event.target.name]: event.target.checked,
+        });
+    };
+
 
 
 
@@ -47,20 +49,20 @@ export default function Actu() {
       if (file)
       {
       const uploadTask = ref(storage, `image/posts/${file.name}-${date}`);
-      const fi = await uploadBytes(uploadTask, file).then((snapshot) => {
+      await uploadBytes(uploadTask, file).then((snapshot) => {
           console.log('Uploaded file!');
       });
       const test = ref(storage, `image/posts/${file.name}-${date}`);
-      const url =  await  getDownloadURL(test)
+      await  getDownloadURL(test)
           .then((url) => {
                console.log('url',url);
                 im.image = url;
           })
       }
 
-      const payload2 = { titre, message, date:(Date.now()), image:im.image };
+      const payload2 = { titre, message, date:(Date.now()), image:im.image, important:state.important };
       try {
-        const uidpost =  await addDoc(collectionRef, payload2);
+        await addDoc(collectionRef, payload2);
         setAlert({
             open: true,
             message: "post published !",
@@ -81,71 +83,69 @@ export default function Actu() {
 
 
 
-
     const formHandler = (e) => {
+
         console.log(e)
         e.preventDefault();
-        const file = e.target[0].files[0];
-        console.log(e.target[0].files[0])
+
+        const file = e.target[5].files[0];
+        console.log(e.target[5].files[0])
         addPost(file);
+
     };
 
 
 
 
-
-
-
     return (
-    <ThemeProvider theme={darkTheme} >
+        <Container style={{ textAlign: "center" }}>
 
-      <Container style={{ textAlign: "center" }}>
-
-          <div className="App">
-              <form onSubmit={formHandler}>
-                  <input type="file" className="input" />
-                  <button type="submit">Upload</button>
-              </form>
-              <hr />
-          </div>
-
-          { edit ?
-
-
-              <div style={{ marginBottom: 30,marginTop : 10}}>
-        <TextField
-            variant="outlined"
-            label="Titre"
-            value={titre}
-            onChange={(e) => setTitre(e.target.value)}
-            fullWidth
-            style={{ marginBottom: 20,marginTop : 30 , width: "100%" }}
-        />
-          <TextField
-              variant="outlined"
-              label="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              fullWidth
-              style={{ marginBottom: 20, width: "100%" }}
-          />
-
-                  <FormControlLabel control={<Switch defaultChecked  color="warning" />} label="Imporant"  />
-                  <div  style={{ marginBottom: 20,marginTop:20 }}>
-
-              </div>
-
-          <SelectButton
-              selected={false}
-
-          > Send Post ! </SelectButton>
-              </div>
+            { edit ?
+                <>
+                    <form onSubmit={formHandler}>
+                        <div style={{ marginBottom: 30,marginTop : 10}}>
+                            <TextField
+                                variant="outlined"
+                                label="Titre"
+                                value={titre}
+                                onChange={(e) => setTitre(e.target.value)}
+                                fullWidth
+                                style={{ marginBottom: 20,marginTop : 30 , width: "100%" }}
+                            />
+                            <TextField
+                                variant="outlined"
+                                label="message"
+                                value={message}
+                                onChange={(e) => setMessage(e.target.value)}
+                                fullWidth
+                                style={{ marginBottom: 20, width: "100%" }}
+                            />
+                            <FormControlLabel control={
+                                <Switch  color="warning"
+                                         checked={state.important} onChange={handleChange} name="important"
+                                />}
+                                              label="Imporant"
+                                             />
 
 
-                  : <> </>}
 
-          <Posts/>
-      </Container>
-    </ThemeProvider>
-  );
+                            <div  style={{ marginBottom: 20,marginTop:20 }}>
+                                <Input type="file" id="icon-button-file" />
+                            </div>
+
+                            <Button type="submit" variant="outlined">Send Post !</Button>
+                        </div>
+                    </form>
+                    <hr />
+                </>
+                : <> </>}
+
+
+            <Container maxWidth="sm">
+                <Posts/>
+            </Container>
+        </Container>
+    );
 }
+
+
