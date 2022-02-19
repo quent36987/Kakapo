@@ -1,7 +1,7 @@
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "./../firebase";
-import {Avatar, Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
+import { Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
 import {blue} from "@mui/material/colors";
 
 
@@ -16,32 +16,32 @@ const Dot = ({ post }) => {
 
 
     return (
-    <Card sx={{ maxWidth: 800  }}>
+        <Card sx={{ maxWidth: 800  }}>
 
-        <CardHeader
-        title={post.titre }
-        action={
-            <IconButton aria-label="settings">
-                <MoreVertIcon />
-            </IconButton>
-        }
-        sx={{ backgroundColor:blue }}
-    />
-        {post.important ? <h1>IMPORANT</h1> : <> </> }
-        { post.image  ? <CardMedia
-            component="img"
-            height="194"
-            image={post.image}
-            alt={'url:' + post.image}
-        />  : <> </>  }
+            <CardHeader
+                title={post.titre }
+                action={
+                    <IconButton aria-label="settings">
+                        <MoreVertIcon />
+                    </IconButton>
+                }
+                sx={{ backgroundColor:blue }}
+            />
+            {post.important ? <h1>IMPORANT</h1> : <> </> }
+            { post.image  ? <CardMedia
+                component="img"
+                height="194"
+                image={post.image}
+                alt={'url:' + post.image}
+            />  : <> </>  }
 
 
-        <CardContent>
-            <Typography  variant="body2" color="text.secondary">
-                {post.message}
-            </Typography>
-        </CardContent>
-    </Card>
+            <CardContent>
+                <Typography  variant="body2" color="text.secondary">
+                    {post.message}
+                </Typography>
+            </CardContent>
+        </Card>
     )
 
 };
@@ -67,7 +67,7 @@ export default function Posts() {
         const q = query(collectionRef, orderBy("date", "desc"));
         const unsub = onSnapshot(q, (snapshot) =>
             setColors(snapshot.docs.map((doc) => ({ ...doc.data() , id: doc.id }))
-        ));
+            ));
 
 
         return unsub;
@@ -77,15 +77,15 @@ export default function Posts() {
     return (
         <Box   sx={{  alignItems: 'center'  }}>
 
-                {colors.map((post) => (
+            {colors.map((post) => (
 
-                    <div key={post.id}  style={{
-                        marginTop:10
+                <div key={post.id}  style={{
+                    marginTop:10
 
-                    }} >
-                        <Dot post={post}   />
-                    </div>
-                ))}
+                }} >
+                    <Dot post={post}   />
+                </div>
+            ))}
         </Box >
 
     );
