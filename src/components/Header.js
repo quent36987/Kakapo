@@ -1,5 +1,4 @@
 import {
-  AppBar,
   Container,
   Toolbar,
   Typography,
@@ -13,13 +12,14 @@ import { useHistory } from "react-router-dom";
 import { AppState } from "../Context";
 import AuthModal from "./Authentication/AuthModal";
 import UserSidebar from "./Authentication/UserSidebar";
-import {Avatar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
+import {AppBar, Avatar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
 import {useEffect, useState} from "react";
 import MenuIcon from '@mui/icons-material/Menu';
 
 import {db} from "../firebase";
 import { doc, getDoc} from "firebase/firestore";
 import {Tooltip} from "chart.js";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,7 +57,7 @@ const Header = () => {
 
 
   const classes = useStyles();
-  const { edit, setEdit, user, perm, setPerm } = AppState();
+  const {edit, setEdit, user, perm, setPerm} = AppState();
 
   const history = useHistory();
 
@@ -66,7 +66,7 @@ const Header = () => {
     if (!user || perm) {
       return;
     }
-    console.log('user :' , user);
+    console.log('user :', user);
     const ref = doc(db, "adm", user.email);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
@@ -77,37 +77,39 @@ const Header = () => {
   }
 
 
-    useEffect(() => {
-        isadm();
-    });
+  useEffect(() => {
+    isadm();
+  });
 
 
-/*
+  /*
 
-<Typography
-                onClick={() => history.push(`/event`)}
-                variant="h6"
-                className={classes.title2}
-            >
-              Evenement
-            </Typography>
-            <Typography
-                onClick={() => history.push(`/bar`)}
-                variant="h6"
-                className={classes.title2}
-            >
-              bar
-            </Typography>
+  <Typography
+                  onClick={() => history.push(`/event`)}
+                  variant="h6"
+                  className={classes.title2}
+              >
+                Evenement
+              </Typography>
+              <Typography
+                  onClick={() => history.push(`/bar`)}
+                  variant="h6"
+                  className={classes.title2}
+              >
+                bar
+              </Typography>
 
- */
+   */
 
 
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <AppBar  color='transparent' position="static" >
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+
+
+      <AppBar  color='transparent' position="static"  >
+        <Container maxWidth="xl" >
+          <Toolbar >
+            <div className="left">
             <Typography
                 variant="h6"
                 noWrap
@@ -118,14 +120,9 @@ const Header = () => {
             >
               Kakapo
             </Typography>
-
-
-
             <Box
                   sx={{ flexGrow: 1 , display: { xs: 'none', md: 'flex'} }}
-
             >
-
 
               {pages.map((page) => (
                   <Button
@@ -137,27 +134,21 @@ const Header = () => {
                   </Button>
               ))}
 
-
-
-
-
-
             </Box>
+            </div>
 
-
-
-
+            <div className="right">
             { perm ? <Button onClick={() => setEdit(!edit)}> Edit </Button> : <></> }
-
-
-
-
             {user ? <UserSidebar /> : <AuthModal />}
+            </div>
 
           </Toolbar>
+
         </Container>
       </AppBar>
-    </ThemeProvider>
+
+
+
   );
 }
 

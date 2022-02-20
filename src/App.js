@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Alert from "./components/Alert";
 import EventPage from "./Pages/EventPage";
 import BarPage from "./Pages/BarPage";
+import Header2 from "./components/Header2";
 
 const useStyles = makeStyles(() => ({
   App: {
@@ -22,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className={classes.App}>
-        <Header />
+        <Header2 />
         <Route path="/" component={Homepage} exact />
         <Route path="/event/" component={EventPage} exact />
         <Route path="/bar/" component={BarPage} exact />
