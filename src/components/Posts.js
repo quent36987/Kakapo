@@ -1,5 +1,5 @@
 import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "./../firebase";
 import { Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
 import {blue} from "@mui/material/colors";
@@ -16,7 +16,7 @@ const Dot = ({ post }) => {
 
 
     return (
-        <Card sx={{ maxWidth: 800  }}>
+        <Card sx={{ maxWidth: 800,  backgroundColor:'#cad3b1'  }}>
 
             <CardHeader
                 title={post.titre }
@@ -25,9 +25,11 @@ const Dot = ({ post }) => {
                         <MoreVertIcon />
                     </IconButton>
                 }
-                sx={{ backgroundColor:blue }}
+                sx={{  }}
             />
-            {post.important ? <h1>IMPORANT</h1> : <> </> }
+
+            <hr />
+            {post.important ? <h1>IMPORTANT</h1> : <> </> }
             { post.image  ? <CardMedia
                 component="img"
                 height="194"
@@ -80,7 +82,7 @@ export default function Posts() {
             {colors.map((post) => (
 
                 <div key={post.id}  style={{
-                    marginTop:10
+                    marginTop:10,
 
                 }} >
                     <Dot post={post}   />

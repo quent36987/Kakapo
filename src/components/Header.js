@@ -13,15 +13,17 @@ import { useHistory } from "react-router-dom";
 import { AppState } from "../Context";
 import AuthModal from "./Authentication/AuthModal";
 import UserSidebar from "./Authentication/UserSidebar";
-import {Button} from "@mui/material";
-import {useEffect} from "react";
+import {Avatar, Box, Button, IconButton, Menu, MenuItem} from "@mui/material";
+import {useEffect, useState} from "react";
+import MenuIcon from '@mui/icons-material/Menu';
 
 import {db} from "../firebase";
 import { doc, getDoc} from "firebase/firestore";
+import {Tooltip} from "chart.js";
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    flex: 2,
     color: "gold",
     fontFamily: "Montserrat",
     fontWeight: "bold",
@@ -47,7 +49,13 @@ const darkTheme = createTheme({
   },
 });
 
-function Header() {
+
+const pages = [['Evenement', '/event'], ['Bar','/bar'], ['Club', '/club']];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const Header = () => {
+
+
   const classes = useStyles();
   const { edit, setEdit, user, perm, setPerm } = AppState();
 
@@ -74,23 +82,9 @@ function Header() {
     });
 
 
+/*
 
-
-  return (
-    <ThemeProvider theme={darkTheme}>
-      <AppBar color="transparent" position="static">
-        <Container>
-          <Toolbar>
-
-            <Typography
-              onClick={() => history.push(`/`)}
-              variant="h6"
-              className={classes.title}
-            >
-              Kakapo
-            </Typography>
-
-            <Typography
+<Typography
                 onClick={() => history.push(`/event`)}
                 variant="h6"
                 className={classes.title2}
@@ -105,11 +99,61 @@ function Header() {
               bar
             </Typography>
 
+ */
+
+
+
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <AppBar  color='transparent' position="static" >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Typography
+                variant="h6"
+                noWrap
+                component="div"
+                onClick={() => history.push(`/`)}
+                className={classes.title}
+                //sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            >
+              Kakapo
+            </Typography>
+
+
+
+            <Box
+                  sx={{ flexGrow: 1 , display: { xs: 'none', md: 'flex'} }}
+
+            >
+
+
+              {pages.map((page) => (
+                  <Button
+                      key={page}
+                      sx={{ my: 2, color: 'white', display: 'block' }}
+                      onClick={() => history.push(page[1])}
+                  >
+                    {page[0]}
+                  </Button>
+              ))}
+
+
+
+
+
+
+            </Box>
+
+
+
+
             { perm ? <Button onClick={() => setEdit(!edit)}> Edit </Button> : <></> }
 
 
 
+
             {user ? <UserSidebar /> : <AuthModal />}
+
           </Toolbar>
         </Container>
       </AppBar>

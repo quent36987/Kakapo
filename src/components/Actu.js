@@ -11,6 +11,7 @@ import Posts from "./Posts";
 
 import {FormControlLabel, Input, Switch} from "@mui/material";
 import {ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {red} from "@mui/material/colors";
 
 
 
@@ -119,11 +120,11 @@ export default function Actu() {
                                 fullWidth
                                 style={{ marginBottom: 20, width: "100%" }}
                             />
-                            <FormControlLabel control={
+                            <FormControlLabel style={{ color:'#cc1414' }}  control={
                                 <Switch  color="warning"
                                          checked={state.important} onChange={handleChange} name="important"
-                                />}
-                                              label="Imporant"
+                                />  }
+                                              label="Important"
                                              />
 
 
