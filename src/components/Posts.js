@@ -2,15 +2,11 @@ import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "./../firebase";
 import { Box, Card, CardContent, CardHeader, CardMedia, IconButton, Typography} from "@mui/material";
-import {blue} from "@mui/material/colors";
-
-
 
 
 function MoreVertIcon() {
     return null;
 }
-
 
 const Dot = ({ post }) => {
 
@@ -57,8 +53,6 @@ export default function Posts() {
     // -> message ?
     // -> image ?
     // -> imporant ?
-
-
 
     const [colors, setColors] = useState([]);
 

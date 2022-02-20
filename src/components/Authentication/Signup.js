@@ -1,4 +1,5 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import { AppState } from "../../Context";
 import { createUserWithEmailAndPassword } from "firebase/auth";

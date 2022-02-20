@@ -3,16 +3,17 @@ import Homepage from "./Pages/HomePage";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
 import InfoEvent from "./Pages/InfoEvent";
-import Header from "./components/Header";
 import Alert from "./components/Alert";
 import EventPage from "./Pages/EventPage";
 import BarPage from "./Pages/BarPage";
-import Header2 from "./components/Header2";
+import Header2 from "./components/Header";
+
+
 
 const useStyles = makeStyles(() => ({
   App: {
-    backgroundColor: "#c7aca6",
-    color:"#718145",
+    backgroundColor: "#cab1ac",
+    color: "white",
     minHeight: "100vh",
   },
 }));

@@ -16,10 +16,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+
+
   },
   paper: {
     width: 400,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#4b4646',
     color: "white",
     borderRadius: 10,
   },
@@ -34,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
 }));
+
 
 export default function AuthModal() {
   const classes = useStyles();

@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import {
     Container,
-    TextField,
     Button,
 } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 import { AppState } from "../Context";
 import {db, storage} from "../firebase";
 import { collection, addDoc  } from "firebase/firestore";
 import Posts from "./Posts";
-
 import {FormControlLabel, Input, Switch} from "@mui/material";
 import {ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import {red} from "@mui/material/colors";
-
-
 
 
 
@@ -96,10 +92,8 @@ export default function Actu() {
 
 
 
-
     return (
         <Container style={{ textAlign: "center" }}>
-
             { edit ?
                 <>
                     <form onSubmit={formHandler}>

@@ -1,4 +1,5 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
+import TextField from '@mui/material/TextField';
 import { useState } from "react";
 import { AppState } from "../../Context";
 import { auth } from "../../firebase";
@@ -48,6 +49,7 @@ const Login = ({ handleClose }) => {
         gap: "20px",
       }}
     >
+
       <TextField
         variant="outlined"
         type="email"
