@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import { IconButton } from '../components';
 import Firebase from '../config/firebase';
 import { AuthenticatedUserContext } from '../navigation/AuthenticatedUserProvider';
+import Post from "../components/Post";
+import HomeStack from "../navigation/HomeStack";
 
 const auth = Firebase.auth();
 
@@ -22,7 +24,7 @@ export default function HomeScreen() {
         <View style={styles.container}>
             <StatusBar style='dark-content' />
             <View style={styles.row}>
-                <Text style={styles.title}>Welcome {user.email}!</Text>
+                <Text style={styles.title}>Welcome !  {user.email}!</Text>
                 <IconButton
                     name='logout'
                     size={24}
@@ -30,7 +32,17 @@ export default function HomeScreen() {
                     onPress={handleSignOut}
                 />
             </View>
+
             <Text style={styles.text}>Your UID is:: {user.uid} </Text>
+
+
+
+            <ScrollView style={styles.scrollView}>
+            <Post title={'fisrt !'}/>
+            <Post title={'et de 2 !'}/>
+            <Post title={'plus on estd e fou plus on ris ! !'}/>
+            </ScrollView>
+
         </View>
     );
 }
