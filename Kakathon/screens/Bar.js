@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, ScrollView, ActivityIndicator, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
 import Firebase from '../config/firebase';
 import Post from "../components/Post";
 

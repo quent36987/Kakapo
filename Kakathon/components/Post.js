@@ -1,29 +1,50 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements'
+import {Ionicons} from "@expo/vector-icons";
 
 const Post = ({
                     title,
+                    message,
+    date,
+    important,
+    image,
+    key,
                 }) => {
     return (
-        <Card>
-            <Card.Title>{title}</Card.Title>
+        <>
+        <Card >
+            {important ?
+                <Card.Title>  <Ionicons name='megaphone' color='red' /> {title}</Card.Title>
+                :
+            <Card.Title>{title}</Card.Title> }
+
+
             <Card.Divider/>
-            <Card.Image source={require('../assets/favicon.png')} />
+            {image ?
+            <Card.Image source={{uri: image}}/> : <></> }
+
+            {message ?
             <Text style={{marginBottom: 10}}>
-                The idea with React Native Elements is more about component structure than actual design.
-            </Text>
-            <Button
-                icon={<Icon name='code' color='#ffffff' />}
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                title='VIEW NOW' />
+                {message}
+            </Text> : <></> }
+
         </Card>
+
+</>
+
     );
 };
 
 const styles = StyleSheet.create({
     text: {
         fontWeight: '600'
+    },
+    titleText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingVertical: 20,
     },
     base: {
         alignItems: 'center',

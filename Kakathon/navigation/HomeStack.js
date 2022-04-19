@@ -12,9 +12,9 @@ import Bar from "../screens/Bar";
 
 
 //Screen names
-const homeName = "Homee";
-const detailsName = "Bar";
-const settingsName = "Club";
+const homeName = "Home";
+const barPage = "Bar";
+const clubPage = "Club";
 
 export default function HomeStack() {
     return (
@@ -26,10 +26,10 @@ export default function HomeStack() {
                         let rn = route.name;
                         if (rn === homeName) {
                             iconName = focused ? 'home' : 'home-outline';
-                        } else if (rn === detailsName) {
-                            iconName = focused ? 'list' : 'list-outline';
-                        } else if (rn === settingsName) {
-                            iconName = focused ? 'settings' : 'settings-outline';
+                        } else if (rn === barPage) {
+                            iconName = focused ? 'fast-food-outline' : 'fast-food-outline';
+                        } else if (rn === clubPage) {
+                            iconName = focused ? 'people' : 'people-outline';
                         }
                         // You can return any component that you like here!
                         return <Ionicons name={iconName} size={size} color={color} />;
@@ -39,14 +39,13 @@ export default function HomeStack() {
                 tabBarOptions={{
                     activeTintColor: 'tomato',
                     inactiveTintColor: 'grey',
-                    labelStyle: { paddingBottom: 10, fontSize: 10 },
+                    labelStyle: { paddingBottom: 5, fontSize: 10 },
                     style: { padding: 10, height: 70},
-
                 }}
                 >
+                <Tab.Screen name={clubPage} component={Club} />
                 <Tab.Screen name={homeName} component={HomeScreen} />
-                <Tab.Screen name={detailsName} component={Club} />
-                <Tab.Screen name={settingsName} component={Bar} />
+                <Tab.Screen name={barPage} component={Bar} />
             </Tab.Navigator>
     );
 }
