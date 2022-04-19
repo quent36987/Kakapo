@@ -4,8 +4,6 @@ import {StyleSheet, ScrollView, ActivityIndicator, View, Text} from 'react-nativ
 import Firebase from '../config/firebase';
 import Post from "../components/Post";
 import {StatusBar} from "expo-status-bar";
-import {IconButton} from "../components";
-import ListPost from "../components/ListPost";
 
 
 class Bar extends Component {
