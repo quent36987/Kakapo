@@ -43,6 +43,7 @@ buck-out/
 *.keystore
 !debug.keystore
 
+.env
 # Bundle artifacts
 *.jsbundle
 
