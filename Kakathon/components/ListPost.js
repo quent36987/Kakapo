@@ -51,7 +51,7 @@ class ListPost extends Component {
                         return (
 
                             <Post title={item.titre} message={item.message} image={item.image} date={item.date}
-                             important={item.important}/>
+                             important={item.important} key={i}/>
                         );
                     })
                 }

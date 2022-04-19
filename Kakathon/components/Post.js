@@ -17,12 +17,13 @@ const Post = ({
             {important ?
                 <Card.Title>  <Ionicons name='megaphone' color='red' /> {title}</Card.Title>
                 :
+
             <Card.Title>{title}</Card.Title> }
 
 
             <Card.Divider/>
             {image ?
-            <Card.Image source={{uri: image}}/> : <></> }
+            <Card.Image source={{uri: image}} style={{marginBottom:10 }}/> : <></> }
 
             {message ?
             <Text style={{marginBottom: 10}}>
@@ -39,12 +40,6 @@ const Post = ({
 const styles = StyleSheet.create({
     text: {
         fontWeight: '600'
-    },
-    titleText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        paddingVertical: 20,
     },
     base: {
         alignItems: 'center',

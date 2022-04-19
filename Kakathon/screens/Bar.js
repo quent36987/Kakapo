@@ -1,8 +1,11 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, ActivityIndicator, View } from 'react-native';
+import {StyleSheet, ScrollView, ActivityIndicator, View, Text} from 'react-native';
 import Firebase from '../config/firebase';
 import Post from "../components/Post";
+import {StatusBar} from "expo-status-bar";
+import {IconButton} from "../components";
+import ListPost from "../components/ListPost";
 
 
 class Bar extends Component {
@@ -51,15 +54,26 @@ class Bar extends Component {
             )
         }
         return (
-            <ScrollView style={styles.wrapper}>
-                {
-                    this.state.students.map((res, i) => {
-                        return (
-                            <Post title={res.titre}/>
-                        );
-                    })
-                }
-            </ScrollView>
+            <View style={styles.container}>
+                <StatusBar style='dark-content' />
+                <View style={styles.row}>
+                    <Text style={styles.title}>A boire</Text>
+                </View>
+
+
+                <ScrollView style={styles.wrapper}>
+                    {
+                        this.state.students.map((res, i) => {
+                            return (
+                                <Post title={res.titre}/>
+                            );
+                        })
+                    }
+                </ScrollView>
+
+
+            </View>
+
         );
     }
 }
@@ -77,6 +91,28 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         bottom: 0,
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#e93b81',
+        paddingTop: 40,
+        paddingHorizontal: 9
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 24
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: '600',
+        color: '#fff'
+    },
+    text: {
+        fontSize: 16,
+        fontWeight: 'normal',
+        color: '#fff'
     }
 })
 
