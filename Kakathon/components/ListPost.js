@@ -47,11 +47,10 @@ class ListPost extends Component {
         return (
             <ScrollView style={styles.container}>
                 {
-                    this.state.postArr.map((item, i) => {
+                    this.state.postArr.map((item,i) => {
                         return (
-
-                            <Post title={item.titre} message={item.message} image={item.image} date={item.date}
-                             important={item.important} key={i}/>
+                                <Post  title={item.titre} message={item.message} image={item.image} date={item.date}
+                                important={item.important} />
                         );
                     })
                 }

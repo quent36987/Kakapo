@@ -4,6 +4,7 @@ import {StyleSheet, ScrollView, ActivityIndicator, View, Text} from 'react-nativ
 import Firebase from '../config/firebase';
 import Post from "../components/Post";
 import {StatusBar} from "expo-status-bar";
+import CardBar from "../components/CardBar";
 
 
 class Bar extends Component {
@@ -61,9 +62,9 @@ class Bar extends Component {
 
                 <ScrollView style={styles.wrapper}>
                     {
-                        this.state.students.map((res, i) => {
+                        this.state.students.map((res) => {
                             return (
-                                <Post title={res.titre}/>
+                                <CardBar title={res.titre} image={res.image}/>
                             );
                         })
                     }
@@ -78,8 +79,8 @@ class Bar extends Component {
 
 const styles = StyleSheet.create({
     wrapper: {
-        flex: 1,
         paddingBottom: 22
+
     },
     loader: {
         position: 'absolute',
