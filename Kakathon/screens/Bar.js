@@ -1,17 +1,22 @@
 
 import React, { Component } from 'react';
-import {StyleSheet, ScrollView, ActivityIndicator, View, Text} from 'react-native';
+import {StyleSheet, ScrollView, ActivityIndicator, View, Text, FlatList, Image, ImageBackground} from 'react-native';
 import Firebase from '../config/firebase';
 import Post from "../components/Post";
 import {StatusBar} from "expo-status-bar";
 import CardBar from "../components/CardBar";
+import cardBar from "../components/CardBar";
 
 
 class Bar extends Component {
 
+
+
+
+
     constructor() {
         super();
-        this.docs = Firebase.firestore().collection('post');
+        this.docs = Firebase.firestore().collection('bar');
         this.state = {
             isLoading: true,
             students: []
@@ -29,10 +34,11 @@ class Bar extends Component {
     getStudentsData = (querySnapshot) => {
         const students = [];
         querySnapshot.forEach((res) => {
-            const { message, titre } = res.data();
+            const { titre } = res.data();
             students.push({
                 key: res.id,
-                message,
+                qt : 5,
+                prix : 69,
                 titre
             });
         });
@@ -41,8 +47,6 @@ class Bar extends Component {
             isLoading: false
         });
     }
-
-
 
     render() {
         if(this.state.isLoading){
@@ -58,29 +62,24 @@ class Bar extends Component {
                 <View style={styles.row}>
                     <Text style={styles.title}>A boire</Text>
                 </View>
+                <ScrollView>
+                    <FlatList
+                        data={this.state.students}
+                        numColumns={2}
+                        renderItem={cardBar}
+                        style={styles.wrapper}
 
-
-                <ScrollView style={styles.wrapper}>
-                    {
-                        this.state.students.map((res) => {
-                            return (
-                                <CardBar title={res.titre} image={res.image}/>
-                            );
-                        })
-                    }
+                    />
                 </ScrollView>
-
-
             </View>
-
         );
     }
 }
 
+
 const styles = StyleSheet.create({
     wrapper: {
-        paddingBottom: 22
-
+        paddingBottom: 22,
     },
     loader: {
         position: 'absolute',
